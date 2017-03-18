@@ -2,9 +2,9 @@ import java.io.*;
 import java.util.*;
 import java.lang.*;
 
-import com.github.javaparser.ast.Node;
-import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
-import com.github.javaparser.ast.body.TypeDeclaration;
+import japa.parser.ast.Node;
+import japa.parser.ast.body.ClassOrInterfaceDeclaration;
+import japa.parser.ast.body.TypeDeclaration;
 import japa.parser.ast.body.ClassOrInterfaceDeclaration;
 import japa.parser.JavaParser;
 import japa.parser.ParseException;
@@ -15,7 +15,7 @@ public class parseInspector {
 	final String input_path;
     final String output_file;
     List<CompilationUnit> comp_unit_holder;
-    HashMap<String, Boolean> map;
+    HashMap<String, Boolean> classOrInterface_map;
 
     parseInspector(String input_path, String output_file) {
         this.input_path = input_path;
@@ -32,12 +32,22 @@ public class parseInspector {
     
     private void classOrInterface(ArrayList<CompilationUnit> comp_unit_array)
     {
-    	for(CompilationUnit CU : comp_unit_array)
+    	for(CompilationUnit comp_unit : comp_unit_array)
     	{
-    		   List<japa.parser.ast.body.TypeDeclaration> cl = CU.getTypes();
-               for (Node n : cl) {
-                   ClassOrInterfaceDeclaration coi = (ClassOrInterfaceDeclaration) n;
-                   map.put(coi.getName(), coi.isInterface()); 
+    		   List<TypeDeclaration> typeHolder = comp_unit.getTypes();
+               for (Node n : typeHolder) {
+                   ClassOrInterfaceDeclaration coi_holder = (ClassOrInterfaceDeclaration) n;
+                   
+                   if(coi_holder.isInterface())
+                   {
+                	   classOrInterface_map.put(coi_holder.getName(), true);
+                   }
+                   else
+                   {
+                	   classOrInterface_map.put(coi_holder.getName(), false);
+                   }
+                   
+                  
                    // false is class,
                                                               // true is interface
                }
