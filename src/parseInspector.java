@@ -23,6 +23,7 @@ public class parseInspector {
     }
     public void parseComputer() throws Exception {
     	comp_unit_holder = getCuArray(input_path);
+    	classOrInterface(comp_unit_holder);
     	System.out.println("the initial code trasnforms to");
     	for(CompilationUnit comp_unit: comp_unit_holder)
     	{
@@ -30,7 +31,7 @@ public class parseInspector {
     	}
     }
     
-    private void classOrInterface(ArrayList<CompilationUnit> comp_unit_array)
+    private void classOrInterface(List<CompilationUnit> comp_unit_array)
     {
     	for(CompilationUnit comp_unit : comp_unit_array)
     	{
@@ -47,9 +48,7 @@ public class parseInspector {
                 	   classOrInterface_map.put(coi_holder.getName(), false);
                    }
                    
-                  
-                   // false is class,
-                                                              // true is interface
+                 
                }
     	}
     }
