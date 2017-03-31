@@ -6,26 +6,33 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-import japa.parser.ast.Node;
+import com.github.javaparser.JavaParser;
+import com.github.javaparser.ast.CompilationUnit;
+import com.github.javaparser.ast.Node;
+import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
+import com.github.javaparser.ast.body.TypeDeclaration;
+
+/*import japa.parser.ast.Node;
 import japa.parser.ast.body.ClassOrInterfaceDeclaration;
 import japa.parser.ast.body.TypeDeclaration;
-import japa.parser.ast.body.ClassOrInterfaceDeclaration;
+
 import japa.parser.JavaParser;
 import japa.parser.ParseException;
 import japa.parser.ast.CompilationUnit;
 
-import japa.parser.JavaParser;
+import japa.parser.JavaParser;*/
 
 //import com.github.javaparser.JavaParser;
 
-import japa.parser.ast.CompilationUnit;
+//import japa.parser.ast.CompilationUnit;
 
 //import com.github.javaparser.ast.CompilationUnit;
 
 public class parseInspector {
 	String input_path;
 	String output_path;
-	List<CompilationUnit> comp_unit_holder;
+	//List<CompilationUnit> comp_unit_holder;
+	 ArrayList<CompilationUnit> comp_unit_holder;
 	  HashMap<String, Boolean> classOrInterface_map;
 	public parseInspector(String input_path, String output_file)
 	{
@@ -37,12 +44,12 @@ public class parseInspector {
 	public void parser_agent() throws Exception
 	{
 		comp_unit_holder = returned_compiler(input_path);
-		for(CompilationUnit comp_unit: comp_unit_holder)
-    	{
-    		System.out.println(comp_unit);
-    		intermediate_code_generator(comp_unit);
-    	}
-		classOrInterface(comp_unit_holder);
+	//	for(CompilationUnit comp_unit: comp_unit_holder)
+    	//{
+    	//	System.out.println(comp_unit);
+    		//intermediate_code_generator(comp_unit);
+    	//}
+		//classOrInterface(comp_unit_holder);
 		
 	}
 	
@@ -59,10 +66,10 @@ public class parseInspector {
 		}
 	}
 	
-	private List<CompilationUnit> returned_compiler(String input_path)
+	private ArrayList<CompilationUnit> returned_compiler(String input_path)
             throws Exception {
         File files = new File(input_path);
-        List<CompilationUnit> comp_unit_collection = new ArrayList<CompilationUnit>();
+        ArrayList<CompilationUnit> comp_unit_collection = new ArrayList<CompilationUnit>();
         for ( File file_unit : files.listFiles()) {
             if (!file_unit.isFile()) {
             	System.out.println("File is missing");
@@ -87,7 +94,8 @@ public class parseInspector {
     }
 	
 	
-	private void classOrInterface(List<CompilationUnit> comp_unit_array)
+    }
+	/*private void classOrInterface(List<CompilationUnit> comp_unit_array)
     {
     	for(CompilationUnit comp_unit : comp_unit_array)
     	{
@@ -107,11 +115,8 @@ public class parseInspector {
                  
                }
     	}
-    }
+    }*/
 	
-	
-	
-	
-}
+
 
 	
