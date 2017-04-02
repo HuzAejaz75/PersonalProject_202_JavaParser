@@ -56,36 +56,41 @@ public class parseInspector {
 	
 	//String UML_code_holder = null;
 	
-	/*private void intermediate_code_generator(CompilationUnit comp_parse_unit)
-	{
-		List<TypeDeclaration> TypeHolder = comp_parse_unit.getTypes();
-		
-		for(TypeDeclaration T : TypeHolder)
-		{
-			System.out.print(T.toString());
-		}
-	}*/
 	
-void PopulateMap(ArrayList<CompilationUnit> comp_parse_array)
+	
+private void PopulateMap(ArrayList<CompilationUnit> comp_parse_array)
     {
     	
         for (CompilationUnit comp_unit : comp_parse_array) {
             List<TypeDeclaration> TypeHolder = comp_unit.getTypes();
             for (Node n : TypeHolder) {
-                ClassOrInterfaceDeclaration coi = (ClassOrInterfaceDeclaration) n;
-                if(coi.isInterface())
+                ClassOrInterfaceDeclaration Type_Unit = (ClassOrInterfaceDeclaration) n;
+                if(Type_Unit.isInterface())
                 {
-                	  classOrInterface_map.put(coi.getName(), true); 
+                	  classOrInterface_map.put(Type_Unit.getName(), true); 
                 }
                 else
                 {
-                	classOrInterface_map.put(coi.getName(), false); 
+                	classOrInterface_map.put(Type_Unit.getName(), false); 
                 }
               
                                       
             }
         }
     }
+	private void parsing(CompilationUnit comp_parsed_unit) {
+    	List<TypeDeclaration> class_types =  comp_parsed_unit.getTypes();
+    	Node node = class_types.get(0);
+    	String class_details;
+    	 
+        
+    	 ClassOrInterfaceDeclaration Class_Or_Interface = (ClassOrInterfaceDeclaration) node;
+         if (Class_Or_Interface.isInterface()) {
+        	 class_details = "[<<interface>>;";
+         } 
+    	
+    }
+	
 	
 	private ArrayList<CompilationUnit> returned_compiler(String input_path)
             throws Exception {
