@@ -56,7 +56,7 @@ public class parseInspector {
 	
 	//String UML_code_holder = null;
 	
-	private void intermediate_code_generator(CompilationUnit comp_parse_unit)
+	/*private void intermediate_code_generator(CompilationUnit comp_parse_unit)
 	{
 		List<TypeDeclaration> TypeHolder = comp_parse_unit.getTypes();
 		
@@ -64,7 +64,28 @@ public class parseInspector {
 		{
 			System.out.print(T.toString());
 		}
-	}
+	}*/
+	
+void PopulateMap(ArrayList<CompilationUnit> comp_parse_array)
+    {
+    	
+        for (CompilationUnit comp_unit : comp_parse_array) {
+            List<TypeDeclaration> TypeHolder = comp_unit.getTypes();
+            for (Node n : TypeHolder) {
+                ClassOrInterfaceDeclaration coi = (ClassOrInterfaceDeclaration) n;
+                if(coi.isInterface())
+                {
+                	  classOrInterface_map.put(coi.getName(), true); 
+                }
+                else
+                {
+                	classOrInterface_map.put(coi.getName(), false); 
+                }
+              
+                                      
+            }
+        }
+    }
 	
 	private ArrayList<CompilationUnit> returned_compiler(String input_path)
             throws Exception {
