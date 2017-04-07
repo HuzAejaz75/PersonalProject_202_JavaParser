@@ -95,10 +95,26 @@ private void PopulateMap(ArrayList<CompilationUnit> comp_parse_array)
          {
         	 class_details = "[<<interface>>;";
          }
-        	 
-        	 
-        	 
-    	
+         
+         class_details += Class_Or_Interface.getName();
+         
+         for(BodyDeclaration body_dec : ((TypeDeclaration)parse_node).getMembers())
+         {
+        	 if(body_dec instanceof ConstructorDeclaration)
+        	 {
+        		class_details = constructor_parsing(body_dec, class_details);// this method parses constructors
+        	 }
+        	 else
+        		 if(body_dec instanceof FieldDeclaration)
+        		 {
+        			 field_parsing(body_dec,class_details); // this method parses fields
+        		 }
+        		 
+         else
+        	 if(body_dec instanceof MethodDeclaration)
+        	 {
+        		 method_parsing(body_dec,class_details);//this method parses methods
+        	 }
     }
 	
 	
