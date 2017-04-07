@@ -144,7 +144,30 @@ private void PopulateMap(ArrayList<CompilationUnit> comp_parse_array)
         }
         return comp_unit_collection;
     }
-	
+	public String constructor_parsing(BodyDeclaration body_dec,String class_details,ClassOrInterfaceDeclaration elem_type)
+    {
+    	String method_parse = "";
+    	ConstructorDeclaration c_dec = (ConstructorDeclaration)body_dec;
+    	String constructor_name = c_dec.getName();
+    	System.out.println(constructor_name);
+    	if(constructor_name.startsWith("public"))
+    	{
+    		if(elem_type.isInterface())
+    		{
+    			method_parse+="+"+c_dec.getName();
+    			method_parse+="(";
+    			for(Object child_nodes : c_dec.getChildrenNodes())
+    			{
+    				if(child_nodes instanceof Parameter)
+    				{
+    					Parameter param = (Parameter) child_nodes;
+    					String param_type = param.getType().toString();
+    					System.out.println(param_type);
+    				}
+    			}
+    		}
+    	}
+    }
 	
     }
 	/*private void classOrInterface(List<CompilationUnit> comp_unit_array)
