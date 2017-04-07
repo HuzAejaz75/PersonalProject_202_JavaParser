@@ -144,6 +144,36 @@ private void PopulateMap(ArrayList<CompilationUnit> comp_parse_array)
         }
         return comp_unit_collection;
     }
+		
+public String method_parsing(BodyDeclaration body_dec, String class_details)
+    {
+    	String method_parse = "";
+    	MethodDeclaration m_dec = (MethodDeclaration)body_dec;
+    	String method_name = m_dec.getName();
+    	System.out.println(constructor_name);
+    	if(method_name.startsWith("set") || method_name.startsWith("get"))
+    	{
+    		String methodName = m_dec.getName();
+    	}
+    	else
+    	{
+    		method_parse += "+ " + m_dec.getName() + "(";
+    		for(Object method_child : m_dec.getChildrenNodes())
+    		{
+    			if(method_child instanceof Parameter)
+    			{
+    				Parameter param_method = (Parameter) method_child;
+    				String param_classname = param_method.getType().toString();
+    				String param_name = param_classname.getChildrenNodes.get(0).toString();
+    				System.out.println("the method name :"+ param_name);
+    			}
+    			else
+    			{
+    				
+    			}
+    		}
+    	}
+    }
 	public String constructor_parsing(BodyDeclaration body_dec,String class_details,ClassOrInterfaceDeclaration elem_type)
     {
     	String method_parse = "";
