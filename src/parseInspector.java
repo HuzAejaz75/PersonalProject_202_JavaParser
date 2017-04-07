@@ -79,15 +79,25 @@ private void PopulateMap(ArrayList<CompilationUnit> comp_parse_array)
         }
     }
 	private void parsing(CompilationUnit comp_parsed_unit) {
+    	String ClassValue;
     	List<TypeDeclaration> class_types =  comp_parsed_unit.getTypes();
-    	Node node = class_types.get(0);
+    	Node parse_node = class_types.get(0);
     	String class_details;
     	 
         
-    	 ClassOrInterfaceDeclaration Class_Or_Interface = (ClassOrInterfaceDeclaration) node;
-         if (Class_Or_Interface.isInterface()) {
+    	 ClassOrInterfaceDeclaration Class_Or_Interface = null;
+    			 Class_Or_Interface = (ClassOrInterfaceDeclaration) parse_node;
+    	 
+         if (!(Class_Or_Interface.isInterface())) {
+        	 class_details = "[";
+         }
+         else
+         {
         	 class_details = "[<<interface>>;";
-         } 
+         }
+        	 
+        	 
+        	 
     	
     }
 	
