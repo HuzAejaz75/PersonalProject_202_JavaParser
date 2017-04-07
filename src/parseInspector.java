@@ -198,6 +198,20 @@ public String method_parsing(BodyDeclaration body_dec, String class_details)
     		}
     	}
     }
+		public String field_parsing(BodyDeclaration body_dec,String class_details)
+    {	
+    	FieldDeclaration field_parse =(FieldDeclaration)body_dec;
+    	String fparam= "";
+    	String fscope = "";
+    	String fclass = "";
+    	String fname = field_parse.getChildrenNodes().get(1).toString();
+    	if(fscope == "+" || fscope == "-")
+    	{
+    		fparam +=fscope +" "+fname + " " + fclass;
+    	}
+    			
+    	
+    	
 	
     }
 	/*private void classOrInterface(List<CompilationUnit> comp_unit_array)
