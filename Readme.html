@@ -25,5 +25,32 @@
                 	   classOrInterface_map.put(coi_holder.getName(), false);
                    }
       In this method we populate the classOrInterface_map with the values of the clases name and a boolean which is true if the read element is an interface and false if it is a class.</p>
+    
+    <p> We are now going to read the values from the java class files and diffrentiate between constructors, fields and methods, for this </p>
+    
+    <p>
+      for(BodyDeclaration body_dec : ((TypeDeclaration)parse_node).getMembers())
+         {
+        	 if(body_dec instanceof ConstructorDeclaration)
+        	 {
+        		class_details = constructor_parsing(body_dec, class_details);// this method parses constructors
+        	 }
+        	 else
+        		 if(body_dec instanceof FieldDeclaration)
+        		 {
+        			 field_parsing(body_dec,class_details); // this method parses fields
+        		 }
+        		 
+         else
+        	 if(body_dec instanceof MethodDeclaration)
+        	 {
+        		 method_parsing(body_dec,class_details);//this method parses methods
+        	 }
+    }
+      
+      
+    </p>
+    
+    This code block checks if the read code is a constrcutor or a method or a parameter.
 </body>
 </html>
