@@ -118,31 +118,38 @@ private void PopulateMap(ArrayList<CompilationUnit> comp_parse_array)
     }
 	
 	
-	private ArrayList<CompilationUnit> returned_compiler(String input_path)
+	private ArrayList<CompilationUnit> getCuHolder(String inputPath)
             throws Exception {
-        File files = new File(input_path);
-        ArrayList<CompilationUnit> comp_unit_collection = new ArrayList<CompilationUnit>();
-        for ( File file_unit : files.listFiles()) {
-            if (!file_unit.isFile()) {
-            	System.out.println("File is missing");
-            	     
-            }
-            else
+        File file = new File(inputPath);
+        ArrayList<CompilationUnit> cuHolder = new ArrayList<CompilationUnit>();
+        //ArrayList<CompilationUnit> cuHold = new ArrayList<CompilationUnit>();
+        File[] fileHolder = file.listFiles();
+        for (final File fileUnit : fileHolder) {
+            
+            if(fileUnit.isFile())
             {
-            	if(file_unit.getName().endsWith(".java"))
+            	String fileName = fileUnit.getName();
+            	if(fileName.endsWith(".java"))
             	{
-            		 FileInputStream in = new FileInputStream(file_unit);
-                     CompilationUnit comp_unit;
-                     try {
-                         comp_unit = JavaParser.parse(in);
-                         comp_unit_collection.add(comp_unit);
-                     } finally {
-                         in.close();
-                     }
+            		CompilationUnit compUnit = null;
+            		 FileInputStream iStream = new FileInputStream(fileUnit);
+                      
+                      try {
+                    	  compUnit = setCuHolder(iStream,compUnit);
+                    	  cuHolder.add(compUnit);
+                      } finally {
+                          iStream.close();
+                      }
+            		
             	}
             }
         }
-        return comp_unit_collection;
+        return cuHolder;
+    }
+    private CompilationUnit setCuHolder(FileInputStream fileStream, CompilationUnit c) throws ParseException, IOException
+    {
+    		c = JavaParser.parse(fileStream);
+        	 return c;
     }
 		
 public String method_parsing(BodyDeclaration body_dec, String class_details)
