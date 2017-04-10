@@ -58,23 +58,19 @@ public class parseInspector {
 	
 	
 	
-private void PopulateMap(ArrayList<CompilationUnit> comp_parse_array)
-    {
-    	
-        for (CompilationUnit comp_unit : comp_parse_array) {
-            List<TypeDeclaration> TypeHolder = comp_unit.getTypes();
-            for (Node n : TypeHolder) {
-                ClassOrInterfaceDeclaration Type_Unit = (ClassOrInterfaceDeclaration) n;
-                if(Type_Unit.isInterface())
+private void TypeHolder(ArrayList<CompilationUnit> cuHolder) {
+        for (CompilationUnit compUnit : cuHolder) {
+            List<TypeDeclaration> typeHold = compUnit.getTypes();
+            for (Node node : typeHold) {
+                ClassOrInterfaceDeclaration elem_type = (ClassOrInterfaceDeclaration) node;
+                if(!(elem_type.isInterface()))//if it is not an interface
                 {
-                	  classOrInterface_map.put(Type_Unit.getName(), true); 
+                	typeMap.put(elem_type.getName(),false); // false if it is a class
                 }
-                else
+                else//if it is an interface
                 {
-                	classOrInterface_map.put(Type_Unit.getName(), false); 
-                }
-              
-                                      
+                	typeMap.put(elem_type.getName(), true);//true if it is an interface
+                }                                           
             }
         }
     }
