@@ -113,7 +113,19 @@ private void TypeHolder(ArrayList<CompilationUnit> cuHolder) {
         	 }
     }
 	
-	
+private String parseEngine(CompilationUnit compUnit) {
+	 String className = "";
+	 List<TypeDeclaration> typeList= compUnit.getTypes();
+         Node node = typeList.get(0); 
+	 ClassOrInterfaceDeclaration typeDetect = (ClassOrInterfaceDeclaration) node;
+        if (!(typeDetect.isInterface()))
+	{
+        	className = "[";
+        } else 
+	{
+            className = "[" + "<<interface>>;";
+        }
+}
 	private ArrayList<CompilationUnit> getCuHolder(String inputPath)
             throws Exception {
         File file = new File(inputPath);
