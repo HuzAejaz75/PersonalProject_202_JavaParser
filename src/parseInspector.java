@@ -213,22 +213,31 @@ public String method_parsing(BodyDeclaration body_dec, String class_details)
     		}
     	}
     }
-		public String field_parsing(BodyDeclaration body_dec,String class_details)
-    {	
-    	FieldDeclaration field_parse =(FieldDeclaration)body_dec;
-    	String fparam= "";
-    	String fscope = "";
-    	String fclass = "";
-    	String fname = field_parse.getChildrenNodes().get(1).toString();
-    	if(fscope == "+" || fscope == "-")
-    	{
-    		fparam +=fscope +" "+fname + " " + fclass;
-    	}
     			
-    	
+    public String fieldParser(BodyDeclaration bDec, boolean nextElem)
+    {
+       String fieldsOutput = "";
+       FieldDeclaration fDec = ((FieldDeclaration)bDec);
+       String scopeVal = bDec.toStringWithoutComments().substring(0, bDec.toStringWithoutComments().indexOf(" "));
+       String fScope =  aToSymScope(scopeVal);
+       //String fScope = null;
+       
+       String fClass = changeBrackets(fDec.getType().toString());//bracketTransform
+       String fName = fDec.getChildrenNodes().get(1).toString();
+      // fScope = scopeDetect(scopeVal)
+       if(fScope == "+" || fScope =="-")
+       {
+           fieldsOutput += fScope +" "+fName+" : "+ fClass;
+       }
+        if(nextElem)
+            fieldsOutput +="; ";
+       return fieldsOutput;
+
+    }
     	
 	
     }
+  
 	/*private void classOrInterface(List<CompilationUnit> comp_unit_array)
     {
     	for(CompilationUnit comp_unit : comp_unit_array)
