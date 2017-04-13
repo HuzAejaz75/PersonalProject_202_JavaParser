@@ -189,6 +189,71 @@ public String method_parsing(BodyDeclaration body_dec, String class_details)
     		}
     	}
     }
+		
+/********************under construction *****************/
+		
+	public void dependancyDetector(className)
+ {
+     boolean hasParam = false;
+     boolean classDep = false;
+     String ReferenceClass = "";
+     if(className.Contains("("))
+     {
+         hasParam = true;
+     }
+
+     if(hasParam)
+     {
+         ReferenceClass = getParam(className);
+     }
+     else 
+     if(typeMap.containsKey(className))//if the field type is a class
+     {
+        ReferenceClass = className;
+        classDep = true;
+
+     }
+
+
+     if(!ReferenceClass.equals(""))
+     {
+         if(classDep)
+         {
+             String buildDependancy = "";
+              if (map.contansKey (ReferenceClass +"-"+className);
+              {
+                  buildDependancy =map.get(ReferenceClass +"-"+className);
+                  if(hasParam)
+                    buildDependancy+= "*";
+                    
+                    map.put(ReferenceClass +"-"+className, buildDependancy);
+              }
+              else{
+                  if(hasParam)
+                  buildDependancy+="*";
+                  map.put(ReferenceClass+"-"+className, buildDependancy);
+              }
+
+           //if it already exists in a dependancy list
+
+         }
+     }
+
+    // check if there is a parameter
+
+ }
+
+ public String getParam(String classVal)
+ 
+ {
+    String parameter = "";
+    int startIndex = classVal.indexOf("(");
+    int endIndex = classVal.indexOf(")");
+    parameter = classVal.substring(startIndex,endIndex);
+    return parameter;
+
+ }
+/************************************ End *************************************/	
 	public String constructor_parsing(BodyDeclaration body_dec,String class_details,ClassOrInterfaceDeclaration elem_type)
     {
     	String method_parse = "";
