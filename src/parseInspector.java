@@ -192,7 +192,7 @@ public String method_parsing(BodyDeclaration body_dec, String class_details)
 		
 /********************under construction *****************/
 		
-	public void dependancyDetector(className)
+	/*public void dependancyDetector(className)
  {
      boolean hasParam = false;
      boolean classDep = false;
@@ -241,7 +241,25 @@ public String method_parsing(BodyDeclaration body_dec, String class_details)
 
     // check if there is a parameter
 
- }
+ }*/
+		
+private void dependancyDetector(String className)//we need class original name
+    {
+    	boolean hasParam = false;
+    	//boolean hasDepen = false;
+    	String referenceClass = "";
+    	
+    	if(className.contains("("))
+    	{
+    		hasParam = true;
+    	}
+    	
+    	if(hasParam)
+    	{
+    		referenceClass = getParam(className);
+    		//hasDepen = true;
+    	}
+}
 
  public String getParam(String classVal)
  
