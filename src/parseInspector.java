@@ -259,6 +259,33 @@ private void dependancyDetector(String className)//we need class original name
     		referenceClass = getParam(className);
     		//hasDepen = true;
     	}
+	else
+    		if(typeMap.containsKey(className))
+    		{
+    			referenceClass = className;
+    		}
+    	if(!(referenceClass.equals("")))
+    	{
+    		if(typeMap.containsKey(referenceClass))
+    		{
+    			String buildDependancy = "-";
+    			if(classConnections.containsKey(referenceClass+"-"+className))
+    			{
+    				buildDependancy = classConnections.get(referenceClass+"-"+className);
+    				if(hasParam)
+    					buildDependancy = "*" +buildDependancy;
+    				classConnections.put(referenceClass+"-"+className, buildDependancy);
+    					
+    			}
+    			else
+    			{
+    				if(hasParam)
+    					buildDependancy += "*";
+    				classConnections.put(referenceClass+"-"+className, buildDependancy);
+    			}
+    		}
+    	}
+    
 }
 
  public String getParam(String classVal)
