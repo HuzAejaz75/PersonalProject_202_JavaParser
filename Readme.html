@@ -50,7 +50,33 @@
       
       
     </p>
+    <p> facing new trouble as the genertated code is not correct and is not giving the accurate abstract syntax tree</p>
+    <p>
+      	}
+    	if(!(referenceClass.equals("")))
+    	{
+    		if(typeMap.containsKey(referenceClass))
+    		{
+    			String buildDependancy = "-";
+    			if(classConnections.containsKey(referenceClass+"-"+className))
+    			{
+    				buildDependancy = classConnections.get(referenceClass+"-"+className);
+    				if(hasParam)
+    					buildDependancy = "*" +buildDependancy;
+    				classConnections.put(referenceClass+"-"+className, buildDependancy);
+    					
+    			}
+    			else
+    			{
+    				if(hasParam)
+    					buildDependancy += "*";
+    				classConnections.put(referenceClass+"-"+className, buildDependancy);
+    			}
+    		}
+    	}
     
-    This code block checks if the read code is a constrcutor or a method or a parameter.
+      
+      
+    </p>
 </body>
 </html>
