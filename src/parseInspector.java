@@ -28,6 +28,40 @@ public class ParseHub {
         readCode = "";
     }
 	
+    private ArrayList<CompilationUnit> getCuHolder(String inputPath)
+            throws Exception {
+        File file = new File(inputPath);
+        ArrayList<CompilationUnit> cuHolder = new ArrayList<CompilationUnit>();
+        File[] fileHolder = file.listFiles();
+        for (final File fileUnit : fileHolder) {
+
+            if(fileUnit.isFile())
+            {
+                String fileName = fileUnit.getName();
+                if(fileName.endsWith(".java"))
+                {
+                    CompilationUnit compUnit = null;
+                    FileInputStream iStream = new FileInputStream(fileUnit);
+
+                    try {
+                        compUnit = setCuHolder(iStream,compUnit);
+                        cuHolder.add(compUnit);
+                    } finally {
+                        iStream.close();
+                    }
+
+                }
+            }
+        }
+        return cuHolder;
+    }
+	
+private CompilationUnit setCuHolder(FileInputStream fileStream, CompilationUnit c) throws ParseException, IOException
+    {
+        c = JavaParser.parse(fileStream);
+        return c;
+    }
+	
  public void controller() throws Exception {
         cuHolder = getCuHolder(inputPath);
         TypeHolder(cuHolder);
