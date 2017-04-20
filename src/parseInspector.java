@@ -1,60 +1,54 @@
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+/**
+ * Created by huzaifa.aejaz on 4/16/17.
+ */
+import java.io.*;
+import java.lang.reflect.Array;
+import java.util.*;
+import java.lang.*;
 
-import com.github.javaparser.JavaParser;
-import com.github.javaparser.ast.CompilationUnit;
-import com.github.javaparser.ast.Node;
-import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
-import com.github.javaparser.ast.body.TypeDeclaration;
+import com.github.javaparser.*;
+import com.github.javaparser.ast.*;
+import com.github.javaparser.ast.body.*;
+import com.github.javaparser.ast.type.ClassOrInterfaceType;
 
-/*import japa.parser.ast.Node;
-import japa.parser.ast.body.ClassOrInterfaceDeclaration;
-import japa.parser.ast.body.TypeDeclaration;
+public class ParseHub {
+    final String inputPath;
+    final String outputPath;
+    HashMap<String, String> classConnections;
+    String readCode;
+    ArrayList<CompilationUnit> cuHolder;
+    HashMap<String, Boolean> typeMap;
 
-import japa.parser.JavaParser;
-import japa.parser.ParseException;
-import japa.parser.ast.CompilationUnit;
 
-import japa.parser.JavaParser;*/
-
-//import com.github.javaparser.JavaParser;
-
-//import japa.parser.ast.CompilationUnit;
-
-//import com.github.javaparser.ast.CompilationUnit;
-
-public class parseInspector {
-	String input_path;
-	String output_path;
-	//List<CompilationUnit> comp_unit_holder;
-	 ArrayList<CompilationUnit> comp_unit_holder;
-	  HashMap<String, Boolean> classOrInterface_map;
-	public parseInspector(String input_path, String output_file)
-	{
-		this.input_path = input_path;
-		this.output_path = input_path + "\\" + output_file + ".png";
-		
-	}
+    ParseHub(String inputPath, String outputPath) {
+        this.inputPath = inputPath;
+        this.outputPath = inputPath + "\\" + outputPath + ".png";
+        typeMap = new HashMap<String, Boolean>();
+        classConnections = new HashMap<String, String>();
+        readCode = "";
+    }
 	
-	public void parser_agent() throws Exception
-	{
-		comp_unit_holder = returned_compiler(input_path);
-	//	for(CompilationUnit comp_unit: comp_unit_holder)
-    	//{
-    	//	System.out.println(comp_unit);
-    		//intermediate_code_generator(comp_unit);
-    	//}
-		//classOrInterface(comp_unit_holder);
-		
-	}
+ public void controller() throws Exception {
+        cuHolder = getCuHolder(inputPath);
+        TypeHolder(cuHolder);
+        for (CompilationUnit cu : cuHolder)
+            readCode += parseEngine(cu);
+        splitController(readCode,outputPath);
+
+    }
+    public void splitController(String rCode,String oPath)
+    {
+        rCode += addConnections();
+        rCode = codeUnique(rCode);
+        System.out.println("Unique Code: " + rCode);
+        DiagramGenerator.imageGenerator( oPath,rCode);
+
+    }
+
+
 	
 	
-	//String UML_code_holder = null;
+
 	
 	
 	
