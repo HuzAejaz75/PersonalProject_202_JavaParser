@@ -119,7 +119,32 @@ private void TypeHolder(ArrayList<CompilationUnit> cuHolder) {
         return output;
     }
 	
-	
+	private String arrayConnection(String[] classes, String output, String key)
+    {
+        if (typeMap.get(classes[0])) {
+            output += "[<<interface>>;" + classes[0];
+            output += "]";
+        }
+        else
+            output += "[" + classes[0] + "]";
+        output += classConnections.get(key); // Add connection
+        if (typeMap.get(classes[1]))
+            output += "[<<interface>>;" + classes[1] + "]";
+        else
+            output += "[" + classes[1] + "]";
+        output += ",";
+
+        return output;
+
+    }
+
+	private String bracketsTransform(String foo) {
+        foo = foo.replace("[", "(");
+        foo = foo.replace("]", ")");
+        foo = foo.replace("<", "(");
+        foo = foo.replace(">", ")");
+        return foo;
+    }
 	
 	
 	private void parsing(CompilationUnit comp_parsed_unit) {
@@ -238,58 +263,7 @@ public String method_parsing(BodyDeclaration body_dec, String class_details)
     	}
     }
 		
-/********************under construction *****************/
-		
-	/*public void dependancyDetector(className)
- {
-     boolean hasParam = false;
-     boolean classDep = false;
-     String ReferenceClass = "";
-     if(className.Contains("("))
-     {
-         hasParam = true;
-     }
 
-     if(hasParam)
-     {
-         ReferenceClass = getParam(className);
-     }
-     else 
-     if(typeMap.containsKey(className))//if the field type is a class
-     {
-        ReferenceClass = className;
-        classDep = true;
-
-     }
-
-
-     if(!ReferenceClass.equals(""))
-     {
-         if(classDep)
-         {
-             String buildDependancy = "";
-              if (map.contansKey (ReferenceClass +"-"+className);
-              {
-                  buildDependancy =map.get(ReferenceClass +"-"+className);
-                  if(hasParam)
-                    buildDependancy+= "*";
-                    
-                    map.put(ReferenceClass +"-"+className, buildDependancy);
-              }
-              else{
-                  if(hasParam)
-                  buildDependancy+="*";
-                  map.put(ReferenceClass+"-"+className, buildDependancy);
-              }
-
-           //if it already exists in a dependancy list
-
-         }
-     }
-
-    // check if there is a parameter
-
- }*/
 		
 private void dependancyDetector(String className)//we need class original name
     {
@@ -394,29 +368,9 @@ private void dependancyDetector(String className)//we need class original name
     }
     	
 	
-    }
+ }
   
-	/*private void classOrInterface(List<CompilationUnit> comp_unit_array)
-    {
-    	for(CompilationUnit comp_unit : comp_unit_array)
-    	{
-    		   List<japa.parser.ast.body.TypeDeclaration> typeHolder = comp_unit.getTypes();
-               for (Node n : typeHolder) {
-                   ClassOrInterfaceDeclaration coi_holder = (ClassOrInterfaceDeclaration) n;
-                   
-                   if(coi_holder.isInterface())
-                   {
-                	   classOrInterface_map.put(coi_holder.getName(), true);
-                   }
-                   else
-                   {
-                	   classOrInterface_map.put(coi_holder.getName(), false);
-                   }
-                   
-                 
-               }
-    	}
-    }*/
+
 	
 
 
