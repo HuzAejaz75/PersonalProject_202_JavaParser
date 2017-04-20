@@ -62,7 +62,8 @@ private CompilationUnit setCuHolder(FileInputStream fileStream, CompilationUnit 
         return c;
     }
 	
- public void controller() throws Exception {
+
+    public void controller() throws Exception {
         cuHolder = getCuHolder(inputPath);
         TypeHolder(cuHolder);
         for (CompilationUnit cu : cuHolder)
@@ -80,12 +81,8 @@ private CompilationUnit setCuHolder(FileInputStream fileStream, CompilationUnit 
     }
 
 
-	
-	
 
-	
-	
-	
+		
 private void TypeHolder(ArrayList<CompilationUnit> cuHolder) {
         for (CompilationUnit compUnit : cuHolder) {
             List<TypeDeclaration> typeHold = compUnit.getTypes();
@@ -93,15 +90,38 @@ private void TypeHolder(ArrayList<CompilationUnit> cuHolder) {
                 ClassOrInterfaceDeclaration elem_type = (ClassOrInterfaceDeclaration) node;
                 if(!(elem_type.isInterface()))//if it is not an interface
                 {
-                	typeMap.put(elem_type.getName(),false); // false if it is a class
+                    typeMap.put(elem_type.getName(),false); // false if it is a class
                 }
                 else//if it is an interface
                 {
-                	typeMap.put(elem_type.getName(), true);//true if it is an interface
-                }                                           
+                    typeMap.put(elem_type.getName(), true);//true if it is an interface
+                }
             }
         }
     }
+	
+	 private String codeUnique(String UMLcode) {
+        String[] umlText = UMLcode.split(",");
+        LinkedHashSet<String> LH = new LinkedHashSet<String>(Arrays.asList(umlText));
+        String[] umlUnique = LH.toArray(new String[0]);
+        String output = String.join(",", umlUnique);
+        return output;
+    }
+
+	private String addConnections() {
+        String output = "";
+        Set<String> keyHolder= classConnections.keySet(); // get all keys
+        for (String key : keyHolder)
+        {
+            String[] classHolder = key.split("-");
+           output += arrayConnection(classHolder,output, key);
+        }
+        return output;
+    }
+	
+	
+	
+	
 	private void parsing(CompilationUnit comp_parsed_unit) {
     	String ClassValue;
     	List<TypeDeclaration> class_types =  comp_parsed_unit.getTypes();
