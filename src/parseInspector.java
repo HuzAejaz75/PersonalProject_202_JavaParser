@@ -345,6 +345,25 @@ private void dependancyDetector(String className)//we need class original name
     		}
     	}
     }
+		
+		
+		 private void TypeHolder(ArrayList<CompilationUnit> cuHolder) {
+        for (CompilationUnit compUnit : cuHolder) {
+            List<TypeDeclaration> typeHold = compUnit.getTypes();
+            for (Node node : typeHold) {
+                ClassOrInterfaceDeclaration elem_type = (ClassOrInterfaceDeclaration) node;
+                if(!(elem_type.isInterface()))//if it is not an interface
+                {
+                    typeMap.put(elem_type.getName(),false); // false if it is a class
+                }
+                else//if it is an interface
+                {
+                    typeMap.put(elem_type.getName(), true);//true if it is an interface
+                }
+            }
+        }
+    }
+
     			
     public String fieldParser(BodyDeclaration bDec, boolean nextElem)
     {
