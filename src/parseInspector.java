@@ -20,7 +20,7 @@ public class ParseHub {
     HashMap<String, Boolean> typeMap;
 
 
-    ParseHub(String inputPath, String outputPath) {
+ ParseHub(String inputPath, String outputPath) {
         this.inputPath = inputPath;
         this.outputPath = inputPath + "\\" + outputPath + ".png";
         typeMap = new HashMap<String, Boolean>();
@@ -63,15 +63,7 @@ private CompilationUnit setCuHolder(FileInputStream fileStream, CompilationUnit 
     }
 	
 
-    public void controller() throws Exception {
-        cuHolder = getCuHolder(inputPath);
-        TypeHolder(cuHolder);
-        for (CompilationUnit cu : cuHolder)
-            readCode += parseEngine(cu);
-        splitController(readCode,outputPath);
-
-    }
-    public void splitController(String rCode,String oPath)
+  public void splitController(String rCode,String oPath)
     {
         rCode += addConnections();
         rCode = codeUnique(rCode);
@@ -79,6 +71,26 @@ private CompilationUnit setCuHolder(FileInputStream fileStream, CompilationUnit 
         DiagramGenerator.imageGenerator( oPath,rCode);
 
     }
+
+    private String codeUnique(String UMLcode) {
+        String[] umlText = UMLcode.split(",");
+        LinkedHashSet<String> LH = new LinkedHashSet<String>(Arrays.asList(umlText));
+        String[] umlUnique = LH.toArray(new String[0]);
+        String output = String.join(",", umlUnique);
+        return output;
+    }
+
+    private String addConnections() {
+        String output = "";
+        Set<String> keyHolder= classConnections.keySet(); // get all keys
+        for (String key : keyHolder)
+        {
+            String[] classHolder = key.split("-");
+           output += arrayConnection(classHolder,output, key);
+        }
+        return output;
+    }
+
 
 
 
