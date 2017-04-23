@@ -363,7 +363,14 @@ private void dependancyDetector(String className)//we need class original name
             }
         }
     }
-
+private void printMaps() {
+        System.out.println("Map:");
+        Set<String> keys = classConnections.keySet(); // get all keys
+        for (String i : keys) {
+            System.out.println(i + "->" + classConnections.get(i));
+        }
+        System.out.println("---");
+    }
     			
     public String fieldParser(BodyDeclaration bDec, boolean nextElem)
     {
