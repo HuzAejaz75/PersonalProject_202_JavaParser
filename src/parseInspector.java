@@ -371,6 +371,34 @@ private void printMaps() {
         }
         System.out.println("---");
     }
+		
+private ArrayList<CompilationUnit> getCuHolder(String inputPath)
+            throws Exception {
+        File file = new File(inputPath);
+        ArrayList<CompilationUnit> cuHolder = new ArrayList<CompilationUnit>();
+        File[] fileHolder = file.listFiles();
+        for (final File fileUnit : fileHolder) {
+
+            if(fileUnit.isFile())
+            {
+                String fileName = fileUnit.getName();
+                if(fileName.endsWith(".java"))
+                {
+                    CompilationUnit compUnit = null;
+                    FileInputStream iStream = new FileInputStream(fileUnit);
+
+                    try {
+                        compUnit = setCuHolder(iStream,compUnit);
+                        cuHolder.add(compUnit);
+                    } finally {
+                        iStream.close();
+                    }
+
+                }
+            }
+        }
+        return cuHolder;
+    }
     			
     public String fieldParser(BodyDeclaration bDec, boolean nextElem)
     {
