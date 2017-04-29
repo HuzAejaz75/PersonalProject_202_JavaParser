@@ -20,6 +20,11 @@
         }
         return cuHolder;
     }
+  private CompilationUnit setCuHolder(FileInputStream fileStream, CompilationUnit c) throws ParseException, IOException
+    {
+        c = JavaParser.parse(fileStream);
+        return c;
+    }
   
 private ArrayList<File> readFiles(final File folderPath)
     {
