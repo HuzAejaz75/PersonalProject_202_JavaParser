@@ -1,6 +1,17 @@
  
  public class SequenceDiagram{
 
+      final String inputPath;
+    final String outputPath;
+    final String fucntionName;
+    String SequenceCode;
+    final String className;
+
+   
+    ArrayList<CompilationUnit> cuHolder;
+    HashMap<String, ArrayList<MethodCallExpr>> callMap;
+     HashMap<String, String> mapHolder;
+  
    private ArrayList<CompilationUnit> getCuHolder(String inPath)
             throws Exception {
         File folder = new File(inPath);
