@@ -1,6 +1,26 @@
  
  public class SequenceDiagram{
 
+   private ArrayList<CompilationUnit> getCuHolder(String inPath)
+            throws Exception {
+        File folder = new File(inPath);
+        ArrayList<CompilationUnit> cuHolder = new ArrayList<CompilationUnit>();
+        ArrayList<File> jFile = readFiles(folder);
+        for(final File f : jFile){
+
+                FileInputStream in = new FileInputStream(f);
+                CompilationUnit compUnit = null;
+                try {
+                    compUnit = setCuHolder(in,compUnit);
+                    cuHolder.add(compUnit);
+                } finally {
+                    in.close();
+                }
+
+        }
+        return cuHolder;
+    }
+  
 private ArrayList<File> readFiles(final File folderPath)
     {
         ArrayList<File> FileCollection = new ArrayList<File>();
