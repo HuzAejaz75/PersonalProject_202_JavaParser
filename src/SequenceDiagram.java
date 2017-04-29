@@ -37,6 +37,23 @@
         return c;
     }
   
+  private ArrayList<MethodCallExpr> statementParser(Object blockStmt)
+    {
+   MethodDeclaration mHolder = (MethodDeclaration) bHolder;
+   if(blockStmt instanceof BlockStmt)
+                {
+    for(Object exppressionStatement : ((Node) blockStmt).getChildrenNodes())
+                    {
+                        if(exppressionStatement instanceof ExpressionStmt)
+                        {
+                         //do something //working on this code
+                        }
+    }
+
+    
+   }
+  }
+  
 private ArrayList<File> readFiles(final File folderPath)
     {
         ArrayList<File> FileCollection = new ArrayList<File>();
